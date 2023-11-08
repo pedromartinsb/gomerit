@@ -1,9 +1,17 @@
 package schemas
 
-import "gorm.io/gorm"
+import "time"
 
 type Company struct {
-	gorm.Model
-	HoldingID uint
 	Name      string
+	HoldingID uint
+}
+
+type CompanyResponse struct {
+	Id          uint      `json:"id"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+	DeletetedAt time.Time `json:"deletedAt,omitempty"`
+	Name        string    `json:"name"`
+	HoldingID   uint      `json:"holdingId"`
 }

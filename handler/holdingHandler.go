@@ -86,7 +86,7 @@ func ShowHoldingHandler(ctx *gin.Context) {
 func ListHoldingsHandler(ctx *gin.Context) {
 	holdings := []schemas.Holding{}
 
-	if err := db.Find(&holdings).Error; err != nil {
+	if err := db.Preload("Company").Find(&holdings).Error; err != nil {
 		sendError(ctx, http.StatusInternalServerError, "error listing holdings")
 		return
 	}

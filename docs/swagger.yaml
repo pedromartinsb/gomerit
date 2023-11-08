@@ -1,4 +1,18 @@
 definitions:
+  handler.CreateCompanyRequest:
+    properties:
+      holding_id:
+        type: integer
+      name:
+        type: string
+    type: object
+  handler.CreateCompanyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CompanyResponse'
+      message:
+        type: string
+    type: object
   handler.CreateHoldingRequest:
     properties:
       name:
@@ -115,8 +129,34 @@ definitions:
       message:
         type: string
     type: object
+  schemas.Company:
+    properties:
+      holdingID:
+        type: integer
+      name:
+        type: string
+    type: object
+  schemas.CompanyResponse:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      holdingId:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
   schemas.HoldingResponse:
     properties:
+      company:
+        items:
+          $ref: '#/definitions/schemas.Company'
+        type: array
       createdAt:
         type: string
       deletedAt:
@@ -154,6 +194,36 @@ definitions:
 info:
   contact: {}
 paths:
+  /company:
+    post:
+      consumes:
+      - application/json
+      description: Create a new company
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateCompanyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateCompanyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create company
+      tags:
+      - Companies
   /holding:
     delete:
       consumes:

@@ -28,6 +28,9 @@ func initializeRoutes(router *gin.Engine) {
 		v1.PUT("/holding", handler.UpdateHoldingHandler)
 		v1.DELETE("/holding", handler.DeleteHoldingHandler)
 		v1.GET("/holdings", handler.ListHoldingsHandler)
+
+		// Company
+		v1.POST("/company", handler.CreateCompanyHandler)
 	}
 
 	// Initialize Swagger

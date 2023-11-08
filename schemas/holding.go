@@ -8,8 +8,8 @@ import (
 
 type Holding struct {
 	gorm.Model
-	Name      string
-	Companies []Company
+	Name    string
+	Company []Company
 }
 
 type HoldingResponse struct {
@@ -18,4 +18,5 @@ type HoldingResponse struct {
 	UpdatedAt   time.Time `json:"updatedAt"`
 	DeletetedAt time.Time `json:"deletedAt,omitempty"`
 	Name        string    `json:"name"`
+	Company     []Company `json:"company"`
 }

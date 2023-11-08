@@ -82,3 +82,15 @@ type DeleteHoldingResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.HoldingResponse `json:"data"`
 }
+
+// Opening
+
+type CreateCompanyResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.CompanyResponse `json:"data"`
+}
+
+type ListCompaniesResponse struct {
+	Message string                    `json:"message"`
+	Data    []schemas.CompanyResponse `json:"data"`
+}

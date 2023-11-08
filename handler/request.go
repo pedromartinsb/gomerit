@@ -83,3 +83,19 @@ func (r *UpdateHoldingRequest) Validate() error {
 	}
 	return fmt.Errorf("valid name filed must be provided")
 }
+
+// CreateCompany
+type CreateCompanyRequest struct {
+	Name      string `json:"name"`
+	HoldingID uint   `json:"holding_id"`
+}
+
+func (r *CreateCompanyRequest) Validate() error {
+	if r.Name == "" {
+		return errParamIsRequired("name", "string")
+	}
+	if r.HoldingID == 0 {
+		return errParamIsRequired("holding_id", "uint")
+	}
+	return nil
+}

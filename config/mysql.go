@@ -36,7 +36,11 @@ func connectDB() (*gorm.DB, error) {
 	}
 
 	// Migrate the schema
-	err = db.AutoMigrate(&schemas.Opening{}, &schemas.Holding{})
+	err = db.AutoMigrate(
+		&schemas.Opening{},
+		&schemas.Holding{},
+		&schemas.Company{},
+	)
 	if err != nil {
 		logger.Errorf("mysql automigrate error: %v", err)
 		return nil, err

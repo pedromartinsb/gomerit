@@ -1,0 +1,20 @@
+# flyctl launch added from .gitignore
+# Binaries
+
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+
+# Test Binaries
+
+**/*.test
+
+# Coverage
+
+**/*.out
+
+# DB folder
+
+**/db
+fly.toml
