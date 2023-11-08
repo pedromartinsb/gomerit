@@ -33,6 +33,13 @@ definitions:
       message:
         type: string
     type: object
+  handler.DeleteHoldingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.HoldingResponse'
+      message:
+        type: string
+    type: object
   handler.DeleteOpeningResponse:
     properties:
       data:
@@ -44,6 +51,15 @@ definitions:
     properties:
       errorCode:
         type: string
+      message:
+        type: string
+    type: object
+  handler.ListHoldingsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.HoldingResponse'
+        type: array
       message:
         type: string
     type: object
@@ -67,6 +83,13 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/schemas.OpeningResponse'
+      message:
+        type: string
+    type: object
+  handler.UpdateHoldingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.HoldingResponse'
       message:
         type: string
     type: object
@@ -132,6 +155,34 @@ info:
   contact: {}
 paths:
   /holding:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a holding
+      parameters:
+      - description: Holding identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteHoldingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete holding
+      tags:
+      - Holdings
     get:
       consumes:
       - application/json
@@ -187,6 +238,63 @@ paths:
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
       summary: Create holding
+      tags:
+      - Holdings
+    put:
+      consumes:
+      - application/json
+      description: Update a holding
+      parameters:
+      - description: Holding identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Holding data to Update
+        in: body
+        name: opening
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateOpeningRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateHoldingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update holding
+      tags:
+      - Holdings
+  /holdings:
+    get:
+      consumes:
+      - application/json
+      description: List all holdings
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListHoldingsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List holdings
       tags:
       - Holdings
   /opening:

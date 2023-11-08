@@ -29,6 +29,8 @@ type ErrorResponse struct {
 	ErrorCode string `json:"errorCode"`
 }
 
+// Opening
+
 type CreateOpeningResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.OpeningResponse `json:"data"`
@@ -54,12 +56,29 @@ type UpdateOpeningResponse struct {
 	Data    schemas.OpeningResponse `json:"data"`
 }
 
+// Holding
+
 type CreateHoldingResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.HoldingResponse `json:"data"`
 }
 
 type ShowHoldingResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.HoldingResponse `json:"data"`
+}
+
+type ListHoldingsResponse struct {
+	Message string                    `json:"message"`
+	Data    []schemas.HoldingResponse `json:"data"`
+}
+
+type UpdateHoldingResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.HoldingResponse `json:"data"`
+}
+
+type DeleteHoldingResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.HoldingResponse `json:"data"`
 }

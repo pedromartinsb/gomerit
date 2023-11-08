@@ -71,3 +71,15 @@ func (r *CreateHoldingRequest) Validate() error {
 	}
 	return nil
 }
+
+// UpdateHolding
+type UpdateHoldingRequest struct {
+	Name string `json:"name"`
+}
+
+func (r *UpdateHoldingRequest) Validate() error {
+	if r.Name != "" {
+		return nil
+	}
+	return fmt.Errorf("valid name filed must be provided")
+}
